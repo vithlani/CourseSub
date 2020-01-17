@@ -17,8 +17,8 @@ subjects: any = [];
   GetSubjects(): Observable<Subject[]>{
     return this.http.get<Subject[]>(this.rootURl + '/subject')
   }
-  GetSubjectByCid(courseId : string ):Observable<Subject>{
-    return this.http.get<Subject>(this.rootURl + '/subject' + )
+  GetSubjectByCid(courseId : string ):Observable<Subject[]>{
+    return this.http.get<Subject[]>(this.rootURl + '/subject/' + courseId + '/subbyid')
   }
 
 }

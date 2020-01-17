@@ -12,8 +12,8 @@ const routes: Routes = [];
     imports: [RouterModule.forChild([
         {path:'subject',component : SubjectsComponent,children:[
         { path:'add',component: AddSubjectComponent},
-        {path:'list',component:ListSubjectComponent},
-        {path:'edit',component:EditSubjectComponent}
+        {path:'edit',component:EditSubjectComponent},
+        {path :'subject/:id',component:ListSubjectComponent}
       ]},
     ]),
     ],

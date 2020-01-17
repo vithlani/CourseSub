@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable  } from "rxjs";
 import { catchError, tap, map } from 'rxjs/operators';
 import { Course } from "./course.model";
+import { Subject } from '../subject/subject.model';
 @Injectable({
   providedIn: 'root'
 })
@@ -10,6 +11,7 @@ export class CourseapiService {
   [x: string]: any;
 
   coures: any = [];
+  subject : Subject[]
   constructor(private http: HttpClient) { }
 
   readonly rootURL = 'http://localhost:52341/api';

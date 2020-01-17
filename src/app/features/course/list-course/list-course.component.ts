@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CourseapiService } from "../courseapi.service";
 import { Course } from '../course.model';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-list-course',
@@ -9,7 +10,7 @@ import { Course } from '../course.model';
 })
 export class ListCourseComponent implements OnInit {
   courselist:Course[];
-  constructor(private courseapiservice : CourseapiService) { }
+  constructor(private courseapiservice : CourseapiService,private router: Router) { }
    
   ngOnInit() {
    
@@ -22,6 +23,9 @@ export class ListCourseComponent implements OnInit {
       console.log(this.courselist); 
     
     });
+  }
+  changee(id:number):void{
+    this.router.navigate(['subject/subject',id]);
   }
 
 

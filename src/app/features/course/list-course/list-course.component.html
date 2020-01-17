@@ -23,12 +23,13 @@
                         <td>{{course.duration }}</td>
                         <td>{{course.fees}}</td>
                         <td>{{course.description}}</td>
-                        <td>{{course.subjects.length}}</td>
+                        <button class="btn btn-outline-primary" type="submit" (click)="changee(course.courseDetailId)">
+                            {{course.subjects.length }}
+                        </button>
                         <td class="btn-group"> 
                             <button [routerLink]="['/course/list',course.courseDetailId]"routerLinkActive="router-link-active" class="btn btn-outline-primary" type="submit" >
                                 view details
-                            </button>    
-                            
+                            </button>
                             <button [routerLink]="['/course/edit',course.courseDetailId]"routerLinkActive="router-link-active" class="btn btn-outline-primary" type="submit" >
                                 Edit
                             </button>    

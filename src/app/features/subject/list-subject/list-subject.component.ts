@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Subject } from '../subject.model';
 import { SubjectserviceService } from '../subjectservice.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-list-subject',
@@ -10,16 +11,16 @@ import { SubjectserviceService } from '../subjectservice.service';
 export class ListSubjectComponent implements OnInit {
   courseId : number;
   subjectlist : Subject[];
-  constructor(private subjservice : SubjectserviceService ) { }
+  constructor(private route : ActivatedRoute,private subjservice : SubjectserviceService ) { }
 
   ngOnInit() {
+    let cid = +this.route.snapshot.paramMap.get('courseId')
+    this.GetSubjectByCid(cid)
 
-    this. GetSubjects()
   }
-  GetSubjects(): void {
-
-    this.subjservice.GetSubjects().subscribe(sub =>{
-      this.subjectlist = sub;
+  GetSubjectByCid(cid) : void{
+    this.subjservice.GetSubjectByCid(cid).subscribe(sb=>{
+      this.subjectlist = sb;
       console.log(this.subjectlist);
     })
   }
