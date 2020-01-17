@@ -1,0 +1,129 @@
+<div class="card">
+    <div class="card-header">
+       {{pageTitle}}
+    </div>
+</div>
+<div class="card-body">
+    <form novalidate (ngSubmit)="save()" [formGroup]="courseForm">
+
+
+        <div class="form-group row mb-2">
+            <label class="col-md-2 col-form-label" for="courseNameId">Course Name</label>
+            <div class="col-md-8">
+                <input class="form-control" id="courseNameId" type="text" placeholder="Course Name (required)"
+                    formControlName="name" [ngClass]="{'is-invalid': (courseForm.get('name').touched ||
+                                              courseForm.get('name').dirty) &&
+                                              !courseForm.get('name').valid }" />
+                <span class="invalid-feedback">
+                    <span *ngIf="courseForm.get('name').errors?.required">
+                        Please enter course name.
+                    </span>
+                    <span *ngIf="courseForm.get('name').errors?.minLength">
+                        Course name should be longer than 5 characters.
+                    </span>
+                </span>
+            </div>
+        </div>
+
+
+        <div class="form-group row mb-2">
+            <label class="col-md-2 col-form-label" for="courseDurationId">Duration</label>
+            <div class="col-md-8">
+                <input class="form-control" id="durationId" type="string"
+                    placeholder="Course Duration in years (required)" 
+                    formControlName="duration" [ngClass]="{'is-invalid': (courseForm.get('duration').touched ||
+                                            courseForm.get('duration').dirty) &&
+                                            !courseForm.get('duration').valid }" />
+                <span class="invalid-feedback">
+                    <span *ngIf="courseForm.get('duration').errors?.required">
+                        Please enter course duration.
+                    </span>
+
+                </span>
+            </div>
+        </div>
+        <div class="form-group row mb-2">
+            <label class="col-md-2 col-form-label" for="feesId">Fees</label>
+
+
+            <div class="col-md-8">
+                <input class="form-control" id="courseFeesId" type="text" placeholder="Course Fees (required)"
+                    formControlName="fees" [ngClass]="{'is-invalid': (courseForm.get('fees').touched ||
+                                            courseForm.get('fees').dirty) &&
+                                            !courseForm.get('fees').valid }" />
+                <span class="invalid-feedback">
+                    <span *ngIf="courseForm.get('fees').errors?.required">
+                        Please enter course fees.
+                    </span>
+                </span>
+            </div>
+        </div>
+
+
+        <div class="form-group row mb-2">
+            <label class="col-md-2 col-form-label" for="descriptionId">Description</label>
+            <div class="col-md-8">
+                <input class="form-control" id="courseDescriptionId" type="text" placeholder="Course Description "
+                    formControlName="description" />
+            </div>
+        </div>
+        <div class="form-group row mb-1">
+            <div class="form-inline" formArrayName="subjects" *ngFor="let subject of subjects.controls; let i=index">
+                <div [formGroupName]="i">
+                    <div class="form-group">
+                        <label class="col-lg-2 col-form-label" for="subjectNameId">Subject name</label>
+                        <div class="col-md-8">
+                            <input class="form-control" id="subjectNameId" type="text" placeholder="Subject Name "
+                                formControlName="sname"
+                                [ngClass]="{'is-invalid': (subjects.controls[i].get('sname').touched ||
+                                                                           subjects.controls[i].get('sname').dirty) &&
+                                                                           !subjects.controls[i].get('sname').valid }" />
+                            <span class="invalid-feedback">
+                                <span *ngIf="subjects.controls[i].get('sname').required">
+                                    Subject name is required.
+                                </span>
+                                <span *ngIf="subjects.controls[i].get('sname').minLength">
+                                    Enter valid Subject.
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class=" form-inline form-group">
+                        <label class="col-lg-2 col-form-label" for="subjectCreditId">Subject credit</label>
+                        <div class="col-md-8">
+                            <input class="form-control" id="subjectCreditId" type="string" placeholder="Subject credit"
+                                formControlName="sCredit"
+                                [ngClass]="{'is-invalid': (subjects.controls[i].get('sCredit').touched ||
+                                                                         subjects.controls[i].get('sCredit').dirty) &&
+                                                                         !subjects.controls[i].get('sCredit').valid }" />
+                            <span class="invalid-feedback">
+                                <span *ngIf="subjects.controls[i].get('sCredit').required">
+                                    Subject credit is required.
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row mb-2">
+                    <div class="offset-md-2 col-md-4">
+                        <button class="btn btn-primary mr-3" type="submit" (click)="removeSubjects(i)">
+                            Delete
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row mb-1">
+            <div class="col-md-2">
+                <button class="btn btn-primary mr-3" type="submit" style="width:80px"
+                    [title]="courseForm.valid ? 'Save your entered data' : 'Disabled until the form data is valid'"
+                    [disabled]="!courseForm.valid">Save
+                </button>
+            </div>
+        </div>
+    </form>
+    <br>Dirty: {{ courseForm.dirty }}
+    <br>Touched: {{ courseForm.touched }}
+    <br>Valid: {{ courseForm.valid }}
+    <br>Value: {{ courseForm.value | json }}
