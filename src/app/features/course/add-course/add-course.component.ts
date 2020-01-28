@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Course } from '../course.model';
 import { CourseapiService } from '../courseapi.service';
 import { ReactiveFormsModule,FormGroup, FormBuilder, Validators, ValidatorFn, AbstractControl,FormArray } from "@angular/forms";
+import { Router } from '@angular/router';
 
 function duration(min: number, max: number): ValidatorFn {
   return (c: AbstractControl): { [key: string]: boolean } | null => {
@@ -39,7 +40,7 @@ export class AddCourseComponent implements OnInit {
   }
 
 
-  constructor(private fb: FormBuilder,private courseapiservice :CourseapiService) { }
+  constructor(private fb: FormBuilder,private courseapiservice :CourseapiService , private router : Router) { }
 
   
   ngOnInit() {
@@ -63,6 +64,7 @@ export class AddCourseComponent implements OnInit {
 
   buildSubjects(): FormGroup{
     return this.fb.group({
+  
       sname:['',[Validators.required,Validators.minLength(3)]],
       sCredit:['',Validators.required]
     })
@@ -72,6 +74,7 @@ export class AddCourseComponent implements OnInit {
     console.log('Saved: ' ,this.courseForm.value); */
     if (this.courseForm.valid) {
       this.courseapiservice.createCourse(this.courseForm.value).subscribe()
+      this.router.navigate(['/course/list']);
     }
     else
     {

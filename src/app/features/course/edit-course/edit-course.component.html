@@ -70,48 +70,65 @@
         <div class="form-group row mb-1">
             <div class="form-inline" formArrayName="subjects" *ngFor="let subject of subjects.controls; let i=index">
                 <div [formGroupName]="i">
+                    <input class="" type="hidden" formControlName="SubjectId">
                     <div class="form-group">
                         <label class="col-lg-2 col-form-label" for="subjectNameId">Subject name</label>
                         <div class="col-md-8">
                             <input class="form-control" id="subjectNameId" type="text" placeholder="Subject Name "
-                                formControlName="sname"
-                                [ngClass]="{'is-invalid': (subjects.controls[i].get('sname').touched ||
-                                                                           subjects.controls[i].get('sname').dirty) &&
-                                                                           !subjects.controls[i].get('sname').valid }" />
+                                formControlName="Sname"
+                                [ngClass]="{'is-invalid': (subjects.controls[i].get('Sname').touched ||
+                                                                           subjects.controls[i].get('Sname').dirty) &&
+                                                                           !subjects.controls[i].get('Sname').valid }" />
                             <span class="invalid-feedback">
-                                <span *ngIf="subjects.controls[i].get('sname').required">
+                                <span *ngIf="subjects.controls[i].get('Sname').required">
                                     Subject name is required.
                                 </span>
-                                <span *ngIf="subjects.controls[i].get('sname').minLength">
+                                <span *ngIf="subjects.controls[i].get('Sname').minLength">
                                     Enter valid Subject.
                                 </span>
                             </span>
                         </div>
                     </div>
-
                     <div class=" form-inline form-group">
                         <label class="col-lg-2 col-form-label" for="subjectCreditId">Subject credit</label>
                         <div class="col-md-8">
-                            <input class="form-control" id="subjectCreditId" type="string" placeholder="Subject credit"
-                                formControlName="sCredit"
-                                [ngClass]="{'is-invalid': (subjects.controls[i].get('sCredit').touched ||
-                                                                         subjects.controls[i].get('sCredit').dirty) &&
-                                                                         !subjects.controls[i].get('sCredit').valid }" />
+                            <input class="form-control" id="subjectCreditId" type="text" placeholder="Subject credit"
+                                formControlName="SCredit"
+                                [ngClass]="{'is-invalid': (subjects.controls[i].get('SCredit').touched ||
+                                                                         subjects.controls[i].get('SCredit').dirty) &&
+                                                                         !subjects.controls[i].get('SCredit').valid }" />
                             <span class="invalid-feedback">
-                                <span *ngIf="subjects.controls[i].get('sCredit').required">
+                                <span *ngIf="subjects.controls[i].get('SCredit').required">
                                     Subject credit is required.
                                 </span>
                             </span>
                         </div>
                     </div>
+                    <div class=" form-inline form-group">
+                        <label class="col-lg-2 col-form-label" for="subjectDescription">Description</label>
+                        <div class="col-md-8">
+                            <input class="form-control" id="subjectDescription" type="string" placeholder="Description"
+                                formControlName="Description"
+                                [ngClass]="{'is-invalid': (subjects.controls[i].get('Description').touched ||
+                                                                         subjects.controls[i].get('Description').dirty) &&
+                                                                         !subjects.controls[i].get('Description').valid }" />
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group row mb-2">
-                    <div class="offset-md-2 col-md-4">
-                        <button class="btn btn-primary mr-3" type="submit" (click)="removeSubjects(i)">
+                    <div class="offset-md-2 ">
+                        <button class="btn btn-primary mr-3" type="submit" (click)="removeSubjects(i,subject.get('SubjectId').value)">
                             Delete
                         </button>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="form-group row mb-2">
+            <div class="offset-md-2 col-md-4">
+                <button class="btn btn-outline-primary" type="submit" [disabled]="!subjects.valid" (click)="addSubjects()">
+                    Add Subject
+                  </button>
             </div>
         </div>
         <div class="form-group row mb-1">

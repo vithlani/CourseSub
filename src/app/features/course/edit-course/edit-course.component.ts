@@ -38,8 +38,6 @@ export class EditCourseComponent implements OnInit {
   get subjects(): FormArray{
     return<FormArray>this.courseForm.get('subjects');
   }
-
-
   constructor(private route : ActivatedRoute,private courseapiservice :CourseapiService, private fb: FormBuilder,private router: Router) { }
 
   ngOnInit() {
@@ -74,26 +72,25 @@ export class EditCourseComponent implements OnInit {
     else 
     {
       this.pageTitle = `Edit Course: ${this.courseDetail.name}`;
-  }
- 
-
-  this.courseForm.patchValue({
-    name: this.courseDetail.name,
-    duration: this.courseDetail.duration,
-    fees: this.courseDetail.fees,
-    description: this.courseDetail.description
-  });
-  
-  this.courseDetail.subjects.forEach(subject => {
-    ( this.courseForm.controls.subjects as FormArray).push(
-      this.fb.group({
-        sname:[subject.sname,[Validators.required,Validators.minLength(3)]],
-        sCredit:[subject.sCredit,[Validators.required]],
-        subjectId: [subject.subjectId]
+    this.courseForm.patchValue({
+       name: this.courseDetail.name,
+       duration: this.courseDetail.duration,
+       fees: this.courseDetail.fees,
+       description: this.courseDetail.description
+     });
+    this.courseDetail.subjects.forEach(subject => {
+        ( this.courseForm.controls.subjects as FormArray).push(
+           this.fb.group({
+          SubjectId:[subject.subjectId],
+          Sname:[subject.sname,[Validators.required,Validators.minLength(3)]],
+          SCredit:[subject.sCredit,[Validators.required]],
+          Description : [subject.description] 
       })
     )
   });
+  console.log(this.courseForm.controls.subjects);
   // this.courseForm.setControl('subjects', this.fb.array(this.courseDetail.subjects || []));
+}
 }
 
   addSubjects():void{
@@ -101,20 +98,28 @@ export class EditCourseComponent implements OnInit {
   }
 
 
-  removeSubjects(i: number) {
+  removeSubjects(i: number,id:number) {
+    debugger
+    console.log(id);
     // remove address from the list
     const control = <FormArray>this.courseForm.controls['subjects'];
+    this.courseapiservice.deleteSubject(id).subscribe();
     control.removeAt(i);
   }
- 
+  
+  deleteSubject(id:number){
+   
+  }
 
   buildSubjects(): FormGroup{
     return this.fb.group({
-      subjectName:['',[Validators.required,Validators.minLength(3)]],
-      subjectCredit:['',[Validators.required,notvalidCredit(1,10)]]
+      SubjectId :[''],
+      Sname:['',[Validators.required,Validators.minLength(3)]],
+      SCredit:['',[Validators.required,notvalidCredit(1,10)]],
+      Description : ['']
     })
   }
-
+  
   
   save(): void {
     if (this.courseForm.valid) {
@@ -148,6 +153,6 @@ export class EditCourseComponent implements OnInit {
   onSaveComplete(): void {
     // Reset the form to clear the flags
     this.courseForm.reset();
-    this.router.navigate(['/course']);
+    this.router.navigate(['/course/list']);
   }
 }

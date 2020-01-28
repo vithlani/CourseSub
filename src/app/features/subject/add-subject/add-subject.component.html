@@ -1,1 +1,72 @@
-<p>add-subject works!</p>
+<div class="card">
+    <div class="card-header">
+      Add Subject.!
+    </div>
+  </div>
+  <div class="card-body">
+    <form novalidate (ngSubmit)="save()" [formGroup]="subjectForm">
+  
+  
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label" for="subjectNameId">Name</label>
+        <div class="col-md-8">
+          <input class="form-control" id="subjectNameId" type="text" placeholder="Subject Name (required)"
+            formControlName="Sname" [ngClass]="{'is-invalid': (subjectForm.get('Sname').touched ||
+                                              subjectForm.get('Sname').dirty) &&
+                                              !subjectForm.get('Sname').valid }" />
+          <span class="invalid-feedback">
+            <span *ngIf="subjectForm.get('Sname').errors?.required">
+              Please enter subject name.
+            </span>
+          </span>
+        </div>
+      </div>
+  
+  
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label" for="subjectCreditId">credit</label>
+        <div class="col-md-8">
+          <input class="form-control" id="subjectCreditId" type="text"
+            placeholder="Subject credit (required)" formControlName="SCredit" 
+            [ngClass]="{'is-invalid': (subjectForm.get('SCredit').touched ||
+                                           subjectForm.get('SCredit').dirty) &&
+                                            !subjectForm.get('SCredit').valid }" />
+          <span class="invalid-feedback">
+            <span *ngIf="subjectForm.get('SCredit').errors?.required">
+              Please enter subject credit.
+            </span>
+          </span>
+        </div>
+      </div>
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label" for="subjectDescriptionId">Description</label>
+        <div class="col-md-8">
+          <input class="form-control" id="subjectDescriptionId" type="text" placeholder="Subject description"
+            formControlName="Description" />
+        </div>
+      </div>
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label" for="courseDetailId">Course</label>
+        <div class="col-md-8">
+          <select formControlName='CourseDetailId' type="number" id="CourseDetailId" onchange="savechange()">
+            <option value="0" >Select Course</option>
+            <option *ngFor="let course of courselist"[ngValue]=course.courseDetailId> {{course.name}} </option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group row mb-1">
+        <div class="col-md-2">
+          <button class="btn btn-primary mr-3"
+                  type="submit"
+                  style="width:80px"
+                  [title]="subjectForm.valid ? 'Save your entered data' : 'Disabled until the form data is valid'"
+                  [disabled]="!subjectForm.valid">Save
+          </button>
+        </div>
+      </div>
+      
+    </form>
+    <br>Dirty: {{ subjectForm.dirty }}
+    <br>Touched: {{ subjectForm.touched }}
+    <br>Valid: {{ subjectForm.valid }}
+    <br>Value: {{ subjectForm.value  | json}}

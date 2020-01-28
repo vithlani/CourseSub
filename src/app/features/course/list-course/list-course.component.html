@@ -23,17 +23,21 @@
                         <td>{{course.duration }}</td>
                         <td>{{course.fees}}</td>
                         <td>{{course.description}}</td>
-                        <button class="btn btn-outline-primary" type="submit" (click)="changee(course.courseDetailId)">
-                            {{course.subjects.length }}
-                        </button>
-                        <td class="btn-group"> 
-                            <button [routerLink]="['/course/list',course.courseDetailId]"routerLinkActive="router-link-active" class="btn btn-outline-primary" type="submit" >
+                        <td>
+                            <button class="btn-sm btn btn-outline-primary " type="submit" (click)="changee(course.courseDetailId)">
+                                {{course.subjects.length }}
+                            </button> 
+                        </td>
+                        <td class="btn-group">
+                            <button [routerLink]="['/course/list',course.courseDetailId]"routerLinkActive="router-link-active" class="btn btn-outline-success" type="submit" >
                                 view details
                             </button>
                             <button [routerLink]="['/course/edit',course.courseDetailId]"routerLinkActive="router-link-active" class="btn btn-outline-primary" type="submit" >
                                 Edit
-                            </button>    
-
+                            </button> 
+                            <button  class="btn btn-outline-danger" type="submit" (click)="deleteCourse(course.courseDetailId)">
+                                Delete
+                            </button>
                         </td>
                     </tr>
                 </tbody>

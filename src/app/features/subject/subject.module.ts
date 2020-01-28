@@ -7,6 +7,7 @@ import { AddSubjectComponent } from './add-subject/add-subject.component';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from 'src/app/app.component';
 import { SubjectsComponent } from './subjects.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -15,6 +16,7 @@ import { SubjectsComponent } from './subjects.component';
   imports: [
     CommonModule,
     SubjectRoutingModule,
+    ReactiveFormsModule
   ]
 })
 export class SubjectModule { }

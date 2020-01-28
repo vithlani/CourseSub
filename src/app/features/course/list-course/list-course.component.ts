@@ -27,6 +27,15 @@ export class ListCourseComponent implements OnInit {
   changee(id:number):void{
     this.router.navigate(['subject/subject',id]);
   }
-
+  deleteCourse(id:number):void{
+    if (confirm(`Delete Course`)){
+      this.courseapiservice.deleteCourse(id).subscribe();
+      console.log(`course deleted`)
+      this.router.navigate(['/course']);
+    }
+    else{
+      this.router.navigate(['/course/list']);
+    }
+  }
 
 }

@@ -6,6 +6,4 @@ export class Subject{
         sCredit : string;       
         description : string;
         courseDetailId : number;
-        courses : Course;
-   
 }

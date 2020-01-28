@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable  } from "rxjs";
+import { Observable, ObservableLike  } from "rxjs";
 import { catchError, tap, map } from 'rxjs/operators';
 import { Course } from "./course.model";
 import { Subject } from '../subject/subject.model';
@@ -42,6 +42,20 @@ export class CourseapiService {
       map(() =>course)
     );
   }
-
+  createSubject(subject: Subject): Observable<Subject> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    subject.subjectId = 0;
+    return this.http.post<Subject>(this.rootURl + '/subject', subject, { headers })
+      .pipe(
+        tap(data => console.log('createSubject: ' + JSON.stringify(data))),
+        map(() => subject),
+        catchError(this.handleError)
+      );
   }
-
+  deleteSubject(subjectId: number):Observable<Course>{
+    return this.http.delete<Course>(this.rootURL + '/Subject/' + subjectId);
+  }
+  deleteCourse(courseId : number):Observable<Course>{
+    return this.http.delete<Course>(this.rootURL + '/Course/' + courseId);
+  }
+}
