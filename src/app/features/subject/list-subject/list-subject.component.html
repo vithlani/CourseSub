@@ -11,17 +11,31 @@
                     <th scope="col">Name</th>
                     <th scope="col">Credit</th>
                     <th scope="col">Description</th>
+                    <th scope="col"></th>
                 </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let subject of subjectlist; let i = index">
+                    <tr *ngFor="let subject of subjectlist; let i = index" >
                         <td>{{i+1}}</td>
                         <td>{{subject.sname }}</td>
                         <td>{{subject.sCredit }}</td>
                         <td>{{subject.description}}</td>
+                        <td>{{subject.subjectId}}</td>
+                        <td><input type="checkbox" data-md-icheck  #checkdelet id="{{subject.subjectId}" name="deletecheck" value="{{subject.subjectId}}" (click)="selectID(subject.subjectId,$event)"></td>
+                        <td>
+                            <button [routerLink]="['/subjectedit',subject.subjectId]"routerLinkActive="router-link-active" class="btn btn-outline-primary" type="submit" >
+                                Edit
+                            </button> 
+                        </td>
                     </tr>
                 </tbody>
-          </table>          
+          </table>  
+          <div class="offset-md-2 col-md-4">
+            <button class="btn btn-outline-primary" type="submit" (click)="deleteSelected()">
+                Delete Selected
+              </button>
+          </div> 
+              
         </div>
     </div>
 </div>

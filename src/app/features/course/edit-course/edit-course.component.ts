@@ -29,11 +29,14 @@ function notvalidCredit(min: number, max: number): ValidatorFn {
   styleUrls: ['./edit-course.component.css']
 })
 export class EditCourseComponent implements OnInit {
+  [x: string]: any;
   pageTitle = 'Edit Course';
   errorMessage : string;
   courseForm: FormGroup
   course : Course;
   courseDetail: Course;
+  SelectedIDs:any = [];
+  result : String = '';
 
   get subjects(): FormArray{
     return<FormArray>this.courseForm.get('subjects');
@@ -97,29 +100,42 @@ export class EditCourseComponent implements OnInit {
     this.subjects.push(this.buildSubjects());
   }
 
-
+  buildSubjects(): FormGroup{
+    return this.fb.group({
+      SubjectId:[0],
+      Sname:['',[Validators.required,Validators.minLength(3)]],
+      SCredit:['',[Validators.required,notvalidCredit(1,10)]],
+      Description : ['']
+    })
+  }
   removeSubjects(i: number,id:number) {
-    debugger
+    
     console.log(id);
     // remove address from the list
     const control = <FormArray>this.courseForm.controls['subjects'];
     this.courseapiservice.deleteSubject(id).subscribe();
     control.removeAt(i);
   }
-  
-  deleteSubject(id:number){
-   
-  }
+  /*selectID(id, event:any){
+    this.SelectedIDs.push(id);
 
-  buildSubjects(): FormGroup{
-    return this.fb.group({
-      SubjectId :[''],
-      Sname:['',[Validators.required,Validators.minLength(3)]],
-      SCredit:['',[Validators.required,notvalidCredit(1,10)]],
-      Description : ['']
-    })
   }
-  
+  deleteSelected(){
+    var i =1
+    console.log(this.SelectedIDs.length);
+    this.SelectedIDs.forEach(element => {
+    if(this.SelectedIDs.length == i)
+    {
+      this.result += 'subids' + '=' +element;
+    }
+    else{
+      this.result += 'subids' +'=' + element + '&';
+    }
+    i++;
+    console.log(this.result);
+    });
+    this.courseapiservice.deleteSubjects(this.SelectedIDs,this.result).subscribe( {error: err => this.errorMessage = err});
+  }*/
   
   save(): void {
     if (this.courseForm.valid) {
@@ -148,7 +164,7 @@ export class EditCourseComponent implements OnInit {
      else {
       this.errorMessage = 'Please correct the validation errors.';
     }
-
+   
   }
   onSaveComplete(): void {
     // Reset the form to clear the flags

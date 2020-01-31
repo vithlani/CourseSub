@@ -10,6 +10,7 @@ import { CoursesComponent } from './courses.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { CoursedetailComponent } from './coursedetail/coursedetail.component';
+import {NgxPaginationModule} from 'ngx-pagination';  
 
 @NgModule({
   declarations: [AddCourseComponent, ListCourseComponent, EditCourseComponent, CoursesComponent, CoursedetailComponent],
@@ -18,7 +19,8 @@ import { CoursedetailComponent } from './coursedetail/coursedetail.component';
     CourseRoutingModule,
     RouterModule,
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxPaginationModule
   ]
 })
 

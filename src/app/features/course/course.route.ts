@@ -11,15 +11,14 @@ import { ListSubjectComponent } from "../subject/list-subject/list-subject.compo
 const routes: Routes = [];
 
 @NgModule({
-  imports: [RouterModule.forChild([
-    {path:'course',component : CoursesComponent,children:[
-    { path:'add',component: AddCourseComponent},
+  imports: [RouterModule.forRoot([
+    {path:'course/list',component : ListCourseComponent},
+    { path:'courseadd',component: AddCourseComponent},
     {path:'list',component:ListCourseComponent},
-    {path:'edit',component:EditCourseComponent},
-    {path:'edit/:id',component:EditCourseComponent},
-    {path:'list/:id',component:CoursedetailComponent},
-    {path :'subject/:id/subbycid',component:ListSubjectComponent}
-  ]},
+    {path:'courseedit',component:EditCourseComponent},
+    {path:'courseedit/:id',component:EditCourseComponent},
+    {path:'courselist/:id',component:CoursedetailComponent},
+    {path :'subbycid/:id',component:ListSubjectComponent}
 ]),
 ],
   exports: [RouterModule]

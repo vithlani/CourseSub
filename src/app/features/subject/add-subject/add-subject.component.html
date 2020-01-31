@@ -48,7 +48,7 @@
       <div class="form-group row mb-2">
         <label class="col-md-2 col-form-label" for="courseDetailId">Course</label>
         <div class="col-md-8">
-          <select formControlName='CourseDetailId' type="number" id="CourseDetailId" onchange="savechange()">
+          <select formControlName='CourseDetailId' type="number" id="CourseDetailId">
             <option value="0" >Select Course</option>
             <option *ngFor="let course of courselist"[ngValue]=course.courseDetailId> {{course.name}} </option>
           </select>

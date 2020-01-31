@@ -70,7 +70,7 @@
         <div class="form-group row mb-1">
             <div class="form-inline" formArrayName="subjects" *ngFor="let subject of subjects.controls; let i=index">
                 <div [formGroupName]="i">
-                    <input class="" type="hidden" formControlName="SubjectId">
+                    <input type="hidden" formControlName="SubjectId">
                     <div class="form-group">
                         <label class="col-lg-2 col-form-label" for="subjectNameId">Subject name</label>
                         <div class="col-md-8">
@@ -114,13 +114,7 @@
                                                                          !subjects.controls[i].get('Description').valid }" />
                         </div>
                     </div>
-                </div>
-                <div class="form-group row mb-2">
-                    <div class="offset-md-2 ">
-                        <button class="btn btn-primary mr-3" type="submit" (click)="removeSubjects(i,subject.get('SubjectId').value)">
-                            Delete
-                        </button>
-                    </div>
+                   
                 </div>
             </div>
         </div>
@@ -140,7 +134,4 @@
             </div>
         </div>
     </form>
-    <br>Dirty: {{ courseForm.dirty }}
-    <br>Touched: {{ courseForm.touched }}
-    <br>Valid: {{ courseForm.valid }}
-    <br>Value: {{ courseForm.value | json }}
+  

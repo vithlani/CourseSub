@@ -7,9 +7,8 @@ import { NgModule } from '@angular/core';
   `<nav class='navbar navbar-expand navbar-light bg-light'>
   <a class='navbar-brand'>{{pageTitle}}</a>
   <ul class='nav nav-pills'>
-  <li><a class='nav-link' routerLinkActive='active' [routerLink]="['/welcome']">Welcome</a></li>
-    <li><a class='nav-link' routerLinkActive='active' [routerLink]="['/course']">Course</a></li>
-    <li><a class='nav-link' routerLinkActive='active' [routerLink]="['/subject']">Subject</a></li>
+    <li><a class='nav-link' routerLinkActive='active' [routerLink]="['/course/list']">Course</a></li>
+    <li><a class='nav-link' routerLinkActive='active' [routerLink]="['/subject/add']">Subject</a></li>
   </ul>
 </nav>
 <div class = 'container'>

@@ -4,6 +4,7 @@ import { FeatureModule } from "./features/feature.module";
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
+import {NgxPaginationModule} from 'ngx-pagination';  
 
 
 @NgModule({

@@ -37,5 +37,14 @@ export class SubjectserviceService {
         catchError(this.handleError)
       );
   }
-  
+  subjectbyid(subjectId : number):Observable<Subject>{
+    return this.http.get<Subject>(this.rootURl + '/subject/' + subjectId)
+  }
+  updateSubject(subjectId:number, subject : Subject):Observable<Subject>{
+    return this.http.put<Subject>(this.rootURl + '/Subject/' + subjectId ,subject).pipe(
+      tap(() => console.log('updateCourse : '+subject.subjectId)),
+      map(() =>subject),
+      catchError(this.handleError)
+    );
+  }
 }

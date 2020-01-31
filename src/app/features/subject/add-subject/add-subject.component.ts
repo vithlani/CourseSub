@@ -40,8 +40,14 @@ export class AddSubjectComponent implements OnInit {
   save(){
     if(this.subjectForm.valid){
       this.subservice.createSubject(this.subjectForm.value)
-      .subscribe()
-      this.router.navigate(['/course/list']);
+      .subscribe( result =>{
+        this.router.navigate(['/course/list']);
+      },
+      err=>{
+
+      }
+      )
+   
     }
     else
     {

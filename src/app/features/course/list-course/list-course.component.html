@@ -2,6 +2,15 @@
     <div class="row">
         <h1 class="">Course List</h1>
     </div>
+        <div class="row">
+        <div class="input-group mb-3 col-md-4">
+            <input class="form-control" id="" type="search" placeholder="Search Course"
+            [formControl]="searchcourse" ngMin ="3">
+        </div>
+    </div>
+    <ul class='nav nav-pills'>
+        <li><a class='nav-link' routerLinkActive='active' [routerLink]="['/courseadd']">ADD COURSE</a></li>
+    </ul>      
     <div class="row">
         <div class="col-lg-5" style="margin-left: 5em;">
             <table class="table">
@@ -17,8 +26,8 @@
                 </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let course of courselist; let i = index">
-                        <td>{{i+1}}</td>
+                    <tr *ngFor="let course of courselist | paginate: { itemsPerPage: 2, currentPage: p }">
+                        <!-- <td>{{i+1}}</td> -->
                         <td>{{course.name }}</td>
                         <td>{{course.duration }}</td>
                         <td>{{course.fees}}</td>
@@ -29,10 +38,10 @@
                             </button> 
                         </td>
                         <td class="btn-group">
-                            <button [routerLink]="['/course/list',course.courseDetailId]"routerLinkActive="router-link-active" class="btn btn-outline-success" type="submit" >
+                            <button [routerLink]="['/courselist',course.courseDetailId]"routerLinkActive="router-link-active" class="btn btn-outline-success" type="submit" >
                                 view details
                             </button>
-                            <button [routerLink]="['/course/edit',course.courseDetailId]"routerLinkActive="router-link-active" class="btn btn-outline-primary" type="submit" >
+                            <button [routerLink]="['/courseedit',course.courseDetailId]"routerLinkActive="router-link-active" class="btn btn-outline-primary" type="submit" >
                                 Edit
                             </button> 
                             <button  class="btn btn-outline-danger" type="submit" (click)="deleteCourse(course.courseDetailId)">
@@ -41,7 +50,12 @@
                         </td>
                     </tr>
                 </tbody>
-          </table>          
+          </table> 
+          <div>
+            <ul class="pagination">  
+                <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>  
+            </ul> 
+          </div>
         </div>
     </div>
-</div>
+</div>  

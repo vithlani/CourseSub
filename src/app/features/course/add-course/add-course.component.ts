@@ -64,7 +64,6 @@ export class AddCourseComponent implements OnInit {
 
   buildSubjects(): FormGroup{
     return this.fb.group({
-  
       sname:['',[Validators.required,Validators.minLength(3)]],
       sCredit:['',Validators.required]
     })
@@ -73,8 +72,15 @@ export class AddCourseComponent implements OnInit {
   /*   console.log(this.courseForm)
     console.log('Saved: ' ,this.courseForm.value); */
     if (this.courseForm.valid) {
-      this.courseapiservice.createCourse(this.courseForm.value).subscribe()
-      this.router.navigate(['/course/list']);
+      this.courseapiservice.createCourse(this.courseForm.value).subscribe(
+        result => {
+          this.router.navigate(['/course/list']);
+        },
+        err=>{
+
+        }
+      )
+ 
     }
     else
     {

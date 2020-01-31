@@ -9,13 +9,12 @@ import { EditSubjectComponent } from './edit-subject/edit-subject.component';
 const routes: Routes = [];
 
 @NgModule({
-    imports: [RouterModule.forChild([
-        {path:'subject',component : SubjectsComponent,children:[
-        { path:'add',component: AddSubjectComponent},
+    imports: [RouterModule.forRoot([
+        {path:'subject/add',component : AddSubjectComponent},
         {path:'edit',component:EditSubjectComponent},
-        {path :'subject/:id',component:ListSubjectComponent}
-      ]},
-    ]),
+        {path:'subjectedit/:id',component:EditSubjectComponent},
+        {path :'subbycid/:id',component:ListSubjectComponent}
+      ]),
     ],
   exports: [RouterModule]
 })
